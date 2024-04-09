@@ -1,4 +1,4 @@
-import { hello } from "./hello.js"
+import { hello } from './hello.js'
 
 describe('hello()', () => {
   it('returns `Hello, world!`', () => {
