@@ -3,33 +3,14 @@ module.exports = {
     es6: true,
     node: true,
   },
-  extends: ['eslint:recommended', 'plugin:perfectionist/recommended-natural'],
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended-type-checked',
+    'plugin:@typescript-eslint/stylistic-type-checked',
+    'plugin:perfectionist/recommended-natural',
+    'plugin:prettier/recommended',
+  ],
   overrides: [
-    {
-      extends: [
-        'plugin:@typescript-eslint/recommended-type-checked',
-        'plugin:@typescript-eslint/stylistic-type-checked',
-      ],
-      files: ['*.ts'],
-      parser: '@typescript-eslint/parser',
-      parserOptions: {
-        ecmaVersion: 'latest',
-        project: true,
-        sourceType: 'module',
-        tsConfigRootDir: __dirname,
-      },
-      plugins: ['@typescript-eslint'],
-      rules: {
-        '@typescript-eslint/no-unused-vars': [
-          'error',
-          {
-            argsIgnorePattern: '^_',
-            caughtErrorsIgnorePattern: '^_',
-            varsIgnorePattern: '^_',
-          },
-        ],
-      },
-    },
     {
       extends: ['plugin:vitest/recommended'],
       files: ['*.test.ts'],
@@ -41,10 +22,29 @@ module.exports = {
         },
       },
     },
+    {
+      extends: ['plugin:@typescript-eslint/disable-type-checked'],
+      files: ['*.js', '*.cjs', '*.mjs'],
+    },
   ],
-  plugins: ['perfectionist', 'prettier'],
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 'latest',
+    project: true,
+    sourceType: 'module',
+    tsConfigRootDir: __dirname,
+  },
+  plugins: ['@typescript-eslint', 'perfectionist'],
   root: true,
   rules: {
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        argsIgnorePattern: '^_',
+        caughtErrorsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+      },
+    ],
     'no-console': 'error',
     'no-process-env': 'error',
     'prettier/prettier': 'error',
